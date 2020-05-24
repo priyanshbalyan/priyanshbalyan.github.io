@@ -13,10 +13,11 @@
     "build": "npm run pug && npm run svg && npm run css && npm run js",
     "package": "npm run build && ./munch",
     "start": "serve --compress public/",
-    "dev": "nodemon -w src --exec npm run build && npm run start"
+    "watch": "watch 'npm run package && npm run start' ./src",
+    "dev": "npm run watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "priyanshbalyan",
   "license": "ISC",
   "devDependencies": {
     "http-server": "^0.9.0",
@@ -25,9 +26,7 @@
     "serve": "^1.4.0",
     "stylus": "^0.54.5",
     "svgo": "^0.7.1",
-    "uglify-js": "^2.7.3"
-  },
-  "dependencies": {
-    "nodemon": "^2.0.3"
+    "uglify-js": "^2.7.3",
+    "watch": "^1.0.2"
   }
 }
