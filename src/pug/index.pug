@@ -1,0 +1,160 @@
+html
+  head
+    title Priyansh Balyan
+    meta(name='viewport',content='width=device-width, initial-scale=1')
+    link(rel='stylesheet',href='css/style.css?0004')
+  body
+    .ScrollWrapper
+      header.Header.js-HasVH(data-vh='0.75')
+        nav
+          a.Nav-link(href='#about')
+            span About
+          a.Nav-link(href='#work') 
+            span Work
+          a.Nav-link(href='#contact') 
+            span Contact
+        // .ContactMenu
+        //   div
+        //     a.ContactMenu-link(href='mailto:priyanshbalyan@gmail.com')
+        //       span priyanshbalyan at gmail dot com
+        //   div
+        //     a.ContactMenu-link(href='mailto:priyanshbalyan@gmail.com')
+        //       span Twitter
+        //     a.ContactMenu-link(href='mailto:priyanshbalyan@gmail.com')
+        //       span Codepen
+        //     a.ContactMenu-link(href='mailto:priyanshbalyan@gmail.com')
+        //       span Dribbble
+
+        .Scene
+          .Scene-sky(role='presentation')
+          canvas.Scene-stars(role='presentation')
+          canvas.Scene-mountains(data-stop-on-scroll='true',role='presentation')
+        h1.Title
+          span Priyansh Balyan
+          span.Title-small(aria-label='Full Stack Software Engineer') Full Stack Software Engineer
+          div.Title-separator.js-Lazyload(role='presentation',data-image='img/separator-green.svg')
+      main
+        .container
+          section
+            h2#about About
+            p.heading Full Stack Software engineer with 2 years of experience working with various technologies such as ReactJS, VueJS, TypeScript.
+            p Working at <a href='https://mahindra.com'>Mahindra</a>. Based in Mumbai, IN.
+          section
+            h2#work Work
+            div.Works
+              - var title='Maze Pathfinder'
+              - var subtitle='ReactJS, Lodash'
+              - var description='A graphical representation of various searching algorithms and how they find paths in a 2D maze.'
+              - var image='img/pic01.jpg'
+              -
+                var links=[
+                  {label:'View demo',link:'https://priyanshbalyan.github.io/maze-runner/'},
+                  {label:'Source',link:'https://github.com/priyanshbalyan/maze-runner'}
+                ]
+              include work
+
+              - var title='Live Covid Tracker'
+              - var subtitle='D3, VueJS, Web Scraping'
+              - var description='Live visualisation of current covid cases aroung the globe'
+              - var link='https://covid-d3.netlify.app/'
+              - var label='See the project'
+              - var image='img/pic02.jpg'
+              
+              -
+                var links=[
+                  {label:'View demo',link:'https://covid-d3.netlify.app/'},
+                  {label:'Source',link:"https://github.com/priyanshbalyan/d3-map"}
+                ]
+              include work
+
+              - var title='Reddit Clone'
+              - var subtitle='NextJS, MongoDB, Jest (Unit tests)'
+              - var description='A reddit clone made with material design guidlines and integrated unit tests. '
+              - var image='img/pic03.jpg'
+    
+              -
+                var links=[
+                  {label:'View demo',link:'http://tympanus.net/Development/StorytellingMap/'},
+                  {label:'Source',link:"https://github.com/priyanshbalyan/maze-runner"}
+                ]
+              include work
+
+              - var title='Todo App'
+              - var subtitle='Loopback 4, TypeScript, VueJS'
+              - var description='A todo app made with Loopback, MongoDB, VueJS (NuxtJS) with Vuetify library.'
+              - var image='img/pic04.jpg'
+              
+              -
+                var links=[
+                  {label:'Source',link:"https://github.com/priyanshbalyan/nuxt-loopback-todo-app"}
+                ]
+
+              include work
+
+              - var title='Crawler Search'
+              - var subtitle='NodeJS, MongoDB'
+              - var description='A web crawler that scrapes github repositories'
+              - var image='img/pic05.jpg'
+              
+              -
+                var links=[
+                  {label:'View demo',link:'https://crawler-search.herokuapp.com/'},
+                  {label:'Source',link:"https://github.com/priyanshbalyan/crawler-search"}
+                ]
+              include work
+
+              - var title='Calculator'
+              - var subtitle='JavaScript'
+              - var description='A vanilla javascript calculator'
+              - var image='img/pic06.jpg'
+              
+              -
+                var links=[
+                  {label:'View demo',link:'https://codepen.io/priyanshbalyan/full/qRWVPX'},
+                  {label:'Source',link:"https://codepen.io/priyanshbalyan/pen/qRWVPX"}
+                ]
+
+              include work
+
+              - var title='Tic Tac Toe'
+              - var subtitle='JavaScript'
+              - var description=''
+              - var image='img/pic07.jpg'
+              -
+                var links=[
+                  {label:'View demo',link:'http://tympanus.net/Development/ElasticProgress/'},
+                  {label:'Source',link:"http://tympanus.net/codrops/elastic-progress/"}
+                ]
+
+              include work
+
+              - var title='Simon Game'
+              - var subtitle='JavaScript'
+              - var description=''
+              - var image='img/pic08.jpg'
+              -
+                var links=[
+                  {label:'View demo',link:'http://tympanus.net/Development/ElasticProgress/'},
+                  {label:'Source',link:"http://tympanus.net/codrops/elastic-progress/"}
+                ]
+
+              include work
+
+          footer
+            h2#contact Contact
+            .text-center
+              .Contact-heading You can drop me a line at
+              a.Email.Footer-link <strong>priyanshbalyan</strong> at <strong>gmail</strong> dot com
+              .Contact-heading You can find me on
+              .Social
+                
+                a.Footer-link.Social-link(href='https://www.linkedin.com/in/priyansh-balyan-461707127/') <strong>linkedin</strong>.com/<strong>priyanshbalyan</strong>
+                br
+                a.Footer-link.Social-link(href='http://github.com/priyanshbalyan') <strong>github</strong>.com/<strong>priyanshbalyan</strong>
+                br
+                a.Footer-link.Social-link(href='http://codepen.io/priyanshbalyan') <strong>codepen</strong>.io/<strong>priyanshbalyan</strong>
+
+      .Scene--bottom
+        canvas.Scene-mountains.Scene-mountains--bottom
+    include shaders
+    script(src='js/main.js?0003')
