@@ -23,7 +23,7 @@
     "http-server": "^0.9.0",
     "pug": "^2.0.0-beta6",
     "pug-cli": "^1.0.0-alpha6",
-    "serve": "^1.4.0",
+    "serve": "^10.1.2",
     "stylus": "^0.54.5",
     "svgo": "^0.7.1",
     "uglify-js": "^2.7.3",
