@@ -43,6 +43,16 @@ html
           section
             h2#work Work
             div.Works
+              - var title='Discord File Storage'
+              - var subtitle='Python, Discord API'
+              - var description='A proof of concept of using Discord servers as file storage'
+              - var image='img/pic11.png'
+              -
+                var links=[
+                  {label:'Source',link:'https://github.com/priyanshbalyan/discord-file-storage'}
+                ]
+              include work
+
               - var title='Maze Pathfinder'
               - var subtitle='ReactJS, Lodash'
               - var description='A graphical representation of various searching algorithms and how they find paths in a 2D maze.'
