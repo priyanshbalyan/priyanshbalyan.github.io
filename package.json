@@ -10,7 +10,7 @@
     "svg": "svgo -f src/svg/ -o public/img/",
     "css": "stylus src/stylus/main.styl -c -o public/css/style.css",
     "js": "uglifyjs src/js/main.js --mangle --compress --source-map public/js/main.map.js --source-map-url /js/main.map.js -o public/js/main.js",
-    "build": "npm run pug && npm run svg && npm run css && npm run js",
+    "build": "npm run pug && npm run svg && npm run css",
     "package": "npm run build && ./munch",
     "start": "serve --compress public/",
     "watch": "watch 'npm run package && npm run start' ./src",
