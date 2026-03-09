@@ -4,16 +4,15 @@
   "description": "",
   "main": "",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "keywords": [],
   "author": "priyanshbalyan",
   "license": "ISC",
   "dependencies": {
-    "next": "14.2.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -21,8 +20,9 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^5.1.4",
     "eslint": "^8",
-    "eslint-config-next": "14.2.14",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^7.3.1"
   }
 }
