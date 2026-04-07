@@ -40,8 +40,8 @@ export default function Work({ title, subtitle, description, image, video, links
   );
 
   return (
-    <article className="flex flex-col mb-[60px] last:mb-[30px] max-md:pt-[260px] max-md:relative max-md:mb-[60px] md:flex-row md:items-center md:odd:flex-row-reverse">
-      <div className="w-full text-center mb-6 md:w-1/2 md:mb-0 md:px-[25px] md:text-right md:group-odd:text-left max-md:text-[16px]">
+    <article className="group flex flex-col mb-[60px] last:mb-[30px] max-md:pt-[260px] max-md:relative max-md:mb-[60px] md:flex-row md:items-center md:even:flex-row-reverse">
+      <div className="w-full text-center mb-6 md:w-1/2 md:mb-0 md:px-[25px] md:text-left md:group-even:text-right max-md:text-[16px]">
         <h3 className="font-sans font-bold text-[30px] leading-tight m-0">
           {title}
           <div className="work-subtitle">{subtitle}</div>
@@ -50,7 +50,7 @@ export default function Work({ title, subtitle, description, image, video, links
           className="mt-[1em] mb-[1.2em] text-[20px] max-md:text-[16px]" 
           dangerouslySetInnerHTML={{ __html: description }}
         ></p>
-        <div className="flex flex-wrap gap-2 justify-center md:justify-end md:group-odd:justify-start">
+        <div className="flex flex-wrap gap-2 justify-center md:justify-start md:group-even:justify-end">
           {links && links.map((item, i) => (
             <a key={i} className="work-link" href={item.link}>
               {item.label}
@@ -59,8 +59,8 @@ export default function Work({ title, subtitle, description, image, video, links
         </div>
       </div>
       
-      <div className="w-full flex justify-center md:w-auto md:relative md:z-10 max-md:absolute max-md:top-0 max-md:left-1/2 max-md:-ml-[156px] max-md:w-[300px]">
-        {mainLink ? <a href={mainLink} className="w-full block">{content}</a> : <div className="w-full">{content}</div>}
+      <div className="w-full flex justify-center md:w-1/2 md:relative md:z-10 max-md:absolute max-md:top-0 max-md:left-1/2 max-md:-ml-[156px] max-md:w-[300px]">
+        {mainLink ? <a href={mainLink} className="w-full flex justify-center">{content}</a> : <div className="w-full flex justify-center">{content}</div>}
       </div>
     </article>
   );

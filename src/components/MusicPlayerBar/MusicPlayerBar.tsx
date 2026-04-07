@@ -19,33 +19,33 @@ function NextIcon() {
 }
 
 export function MusicPlayerBar() {
-  const { tracks, currentIndex, next, prev } = usePlayer()
+  const { tracks, currentIndex, next, prev, hasStarted } = usePlayer()
   const track = tracks[currentIndex]
   const label = `${track.artist} — ${track.title}`
 
   return (
-    <div className="w-48 absolute top-0 right-0">
-    <div className="flex items-center gap-3 px-4 py-2 backdrop-blur-sm border-b border-white/10">
-      <button
-        onClick={prev}
-        aria-label="Previous track"
-        className="shrink-0 text-white/50 hover:text-white transition-colors cursor-pointer"
-      >
-        <PrevIcon />
-      </button>
+    <div className={`w-40 fixed top-[10px] right-[10px] z-50 transition-all duration-1000 ${hasStarted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+      <div className="flex items-center gap-3 px-4 py-2 bg-brand-navy/60 backdrop-blur-md border border-white/10 rounded-full shadow-lg">
+        <button
+          onClick={prev}
+          aria-label="Previous track"
+          className="shrink-0 text-white/50 hover:text-white transition-colors cursor-pointer"
+        >
+          <PrevIcon />
+        </button>
 
-      <div className="flex-1 min-w-0 text-white/70">
-        <MarqueeText text={label} />
+        <div className="flex-1 min-w-0 text-white/70">
+          <MarqueeText text={label} />
+        </div>
+
+        <button
+          onClick={next}
+          aria-label="Next track"
+          className="shrink-0 text-white/50 hover:text-white transition-colors cursor-pointer"
+        >
+          <NextIcon />
+        </button>
       </div>
-
-      <button
-        onClick={next}
-        aria-label="Next track"
-        className="shrink-0 text-white/50 hover:text-white transition-colors cursor-pointer"
-      >
-        <NextIcon />
-      </button>
-    </div>
     </div>
   )
 }

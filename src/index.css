@@ -17,7 +17,7 @@
   }
   
   a {
-    @apply text-brand-pink no-underline transition-colors font-sans;
+    @apply text-brand-pink no-underline transition-colors;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -73,9 +73,9 @@
     @apply text-center font-sans font-bold text-[40px] m-0 pt-[30px] mb-[30px] after:content-[''] after:block after:w-[67px] after:h-[17px] after:mx-auto after:mt-[18px] after:bg-[url('/img/separator.svg')] after:bg-no-repeat sm:text-[35px] sm:after:scale-75;
   }
 
-  /* JS Hooks */
+  /* JS Hooks used by main.js to target elements for WebGL and Lazyloading */
   .Scene-mountains, .Scene-stars, .Scene-sky, .js-Lazyload, .js-HasVH, .Work-video {
-    /* These classes are used as hooks in main.js */
+    /* No styles needed here; classes are used as element selectors */
   }
 }
 
