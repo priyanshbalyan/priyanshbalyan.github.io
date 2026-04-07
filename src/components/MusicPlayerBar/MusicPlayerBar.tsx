@@ -10,6 +10,22 @@ function PrevIcon() {
   )
 }
 
+function PauseIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M6 18h4V6H6v12zm6 0h4V6h-4v12z" />
+    </svg>
+  )
+}
+
+function PlayIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  )
+}
+
 function NextIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -19,7 +35,7 @@ function NextIcon() {
 }
 
 export function MusicPlayerBar() {
-  const { tracks, currentIndex, next, prev, hasStarted } = usePlayer()
+  const { tracks, currentIndex, next, prev, hasStarted, isPlaying, pause, start } = usePlayer()
   const track = tracks[currentIndex]
   const label = `${track.artist} — ${track.title}`
 
@@ -32,6 +48,13 @@ export function MusicPlayerBar() {
           className="shrink-0 text-white/50 hover:text-white transition-colors cursor-pointer"
         >
           <PrevIcon />
+        </button>
+        <button
+          onClick={isPlaying ? pause : start}
+          aria-label={isPlaying ? "Pause track" : "Play track"}
+          className="shrink-0 text-white/50 hover:text-white transition-colors cursor-pointer"
+        >
+          {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
 
         <div className="flex-1 min-w-0 text-white/70">

@@ -13,6 +13,7 @@ export interface AudioPlayerControls {
   prev: () => void
   selectTrack: (index: number) => void
   start: () => void
+  pause: () => void
 }
 
 export function useAudioPlayer(tracks: Track[]): AudioPlayerControls {
@@ -68,8 +69,17 @@ export function useAudioPlayer(tracks: Track[]): AudioPlayerControls {
   }, [isPlaying])
 
   const start = useCallback(() => {
+    audioRef.current?.play()
     setIsPlaying(true)
     setHasStarted(true)
+  }, [])
+
+  const pause = useCallback(() => {
+    const audio = audioRef.current
+    if (audio) {
+      audio.pause()
+    }
+    setIsPlaying(false)
   }, [])
 
   const next = useCallback(() => {
@@ -90,5 +100,5 @@ export function useAudioPlayer(tracks: Track[]): AudioPlayerControls {
     setHasStarted(true)
   }, [])
 
-  return { tracks, currentIndex, isPlaying, hasStarted, next, prev, selectTrack, start }
+  return { tracks, currentIndex, isPlaying, hasStarted, next, prev, selectTrack, start, pause }
 }
