@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cream: #ffeddb;
+  --color-brand-navy: #1b2947;
+  --color-brand-pink: #e96f92;
+  --color-brand-cyan: #54fad4;
+  --color-brand-purple: #75517d;
+  
+  --font-serif: Georgia, serif;
+  --font-sans: 'Avenir Next', 'Segoe ui', Ubuntu, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-cream text-brand-navy font-serif text-[20px] leading-[1.6] m-0 p-0;
+  }
+  
+  a {
+    @apply text-brand-pink no-underline transition-colors font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  /* Navigation Link Underline Animation */
+  .nav-link-span {
+    @apply inline-block pb-[10px] relative;
+  }
+
+  .nav-link-span::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-[3px] bg-brand-pink scale-x-0 -translate-y-[10px] block transition-transform duration-80;
+  }
+
+  .nav-link:hover .nav-link-span::after {
+    @apply duration-80 ease-out scale-x-100 translate-y-0;
+  }
+
+  .nav-link:hover .nav-link-span {
+    @apply transition-colors duration-80 text-brand-pink;
+  }
+
+  .nav-link:active .nav-link-span {
+    @apply transition-none text-brand-cyan;
+  }
+
+  .nav-link:active .nav-link-span::after {
+    @apply bg-brand-cyan transition-none scale-y-[1.2];
+  }
+
+  /* Scenes & Sky */
+  .scene-sky-gradient {
+    background: linear-gradient(#1b2947, #282f51, #36365a, #443c63, #52426b, #614973, #704f7b, #815482, #935988, #a55d8d, #b86291, #cb6692, #dd6b93, #ec7691, #f18c90, #f3a195, #f3b6a0, #f3c9b2, #f3dcc7, #ffeddb);
+  }
+
+  .work-link {
+    @apply inline-block bg-brand-pink text-[0.85em] px-[20px] py-[10px] text-brand-cream font-sans no-underline font-bold transition-all duration-120 shadow-[3px_7px_20px_rgba(117,81,125,0.2)] active:transform-none active:bg-brand-cyan active:text-brand-navy hover:bg-brand-navy hover:text-brand-pink;
+  }
+
+  .work-subtitle {
+    @apply font-serif italic text-[20px] text-brand-purple font-normal;
+  }
+
+  .section-divider {
+    @apply relative pb-[70px] mb-[50px] after:content-[''] after:block after:w-[300px] after:h-[1px] after:absolute after:left-1/2 after:bottom-0 after:-ml-[150px] after:bg-brand-purple/15;
+  }
+
+  .heading-with-icon {
+    @apply text-center font-sans font-bold text-[40px] m-0 pt-[30px] mb-[30px] after:content-[''] after:block after:w-[67px] after:h-[17px] after:mx-auto after:mt-[18px] after:bg-[url('/img/separator.svg')] after:bg-no-repeat sm:text-[35px] sm:after:scale-75;
+  }
+
+  /* JS Hooks */
+  .Scene-mountains, .Scene-stars, .Scene-sky, .js-Lazyload, .js-HasVH, .Work-video {
+    /* These classes are used as hooks in main.js */
+  }
+}
+
+@layer utilities {
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  
+  .animate-marquee {
+    animation: marquee 18s linear infinite;
+  }
+  
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+}

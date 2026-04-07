@@ -1,7 +1,25 @@
 import Work from './components/Work';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { PlayerProvider } from './context/PlayerContext';
+
+const MusicPlayerBar = lazy(() => import('./components/MusicPlayerBar'));
+
+function usePageLoaded() {
+  const [loaded, setLoaded] = useState(() => document.readyState === 'complete');
+
+  useEffect(() => {
+    if (document.readyState === 'complete') return;
+    const onLoad = () => setLoaded(true);
+    window.addEventListener('load', onLoad);
+    return () => window.removeEventListener('load', onLoad);
+  }, []);
+
+  return loaded;
+}
 
 export default function App() {
+  const pageLoaded = usePageLoaded();
+
   useEffect(() => {
     // Dynamically load main.js after the React components have mounted
     // This replicates the Next.js lazyOnload/interactive strategy
@@ -17,43 +35,52 @@ export default function App() {
 
   return (
     <div className="ScrollWrapper">
-      <header className="Header js-HasVH" data-vh="0.75">
-        <nav>
-          <a className="Nav-link" href="#about">
-            <span>About</span>
+      <header className="relative min-h-[300px] h-[75vh] mb-[90px]" data-vh="0.75">
+        <nav className="absolute w-full z-[2] py-[20px] text-center">
+          <a className="nav-link Nav-link text-brand-cream no-underline font-sans font-bold px-[20px] md:px-[40px] py-[10px] mx-[5px] md:mx-[10px] text-[16px]" href="#about">
+            <span className="nav-link-span">About</span>
           </a>
-          <a className="Nav-link" href="#work">
-            <span>Work</span>
+          <a className="nav-link Nav-link text-brand-cream no-underline font-sans font-bold px-[20px] md:px-[40px] py-[10px] mx-[5px] md:mx-[10px] text-[16px]" href="#work">
+            <span className="nav-link-span">Work</span>
           </a>
-          <a className="Nav-link" href="#contact">
-            <span>Contact</span>
+          <a className="nav-link Nav-link text-brand-cream no-underline font-sans font-bold px-[20px] md:px-[40px] py-[10px] mx-[5px] md:mx-[10px] text-[16px]" href="#contact">
+            <span className="nav-link-span">Contact</span>
           </a>
         </nav>
 
-        <div className="Scene">
-          <div className="Scene-sky" role="presentation"></div>
-          <canvas className="Scene-stars" role="presentation"></canvas>
-          <canvas className="Scene-mountains" data-stop-on-scroll="true" role="presentation"></canvas>
+        <div className="absolute inset-0 Scene">
+          <div className="absolute inset-0 Scene-sky scene-sky-gradient" role="presentation"></div>
+          <canvas className="absolute top-0 left-0 w-full h-full Scene-stars" role="presentation"></canvas>
+          <canvas className="absolute bottom-0 left-0 w-full h-[300px] -mb-[150px] opacity-0 transition-opacity duration-100 max-md:h-[200px] max-md:-mb-[100px] Scene-mountains" data-stop-on-scroll="true" role="presentation"></canvas>
         </div>
-        <h1 className="Title">
+        <h1 className="absolute top-1/2 w-full text-center uppercase -mt-[50px] tracking-[0.2em] text-[40px] md:text-[45px] leading-[1.4] font-bold text-brand-cyan font-sans max-md:tracking-normal max-md:normal-case">
           <span>Priyansh Balyan</span>
-          <span className="Title-small" aria-label="Senior Frontend Engineer">
+          <span className="block text-[0.6em] text-brand-cream h-[1em] tracking-[0.2em] mb-[15px] max-md:tracking-normal max-md:normal-case max-md:text-[0.7em]" aria-label="Senior Frontend Engineer">
             Senior Frontend Engineer
           </span>
-          <div className="Title-separator js-Lazyload" role="presentation" data-image="img/separator-green.svg"></div>
+          <center>
+            <div className="relative w-0 mx-auto js-Lazyload" role="presentation" data-image="img/separator-green.svg"></div>
+          </center>
         </h1>
       </header>
 
       <main>
-        <div className="container">
-          <section>
-            <h2 id="about">About</h2>
-            <p className="heading">
+        <div className="max-w-[700px] mx-auto px-[20px] w-full">
+          {pageLoaded && (
+            <PlayerProvider>
+              <Suspense fallback={null}>
+                <MusicPlayerBar />
+              </Suspense>
+            </PlayerProvider>
+          )}
+          <section className="section-divider">
+            <h2 id="about" className="heading-with-icon">About</h2>
+            <p className="text-[1.2em]">
               Senior Frontend engineer with 7 years of experience working with various technologies such as ReactJS,
               VueJS, TypeScript.
             </p>
             <p>
-              Working at <a href="https://moneyforward.com">Money Forward</a>. Previously{' '}
+              Working at <a href="https://moneyforward.co.jp">Money Forward</a>. Previously{' '}
               <a href="https://paypay.ne.jp">PayPay</a>, <a href="https://agoda.com">Agoda</a>. Based in Tokyo, Japan.{' '}
               <a href="https://docs.google.com/document/d/1Aimw-h4wFM6_kSxg8RYiK8f76Qp4JmUf6zPI-J1wFOM/edit?usp=sharing">
                 Resume
@@ -61,9 +88,9 @@ export default function App() {
             </p>
           </section>
 
-          <section>
-            <h2 id="work">Work</h2>
-            <div className="Works">
+          <section className="section-divider">
+            <h2 id="work" className="heading-with-icon">Work</h2>
+            <div className="flex flex-col pt-[20px]">
               <Work
                 title="Pirate Villa"
                 subtitle="Property Rental Site"
@@ -168,32 +195,32 @@ export default function App() {
           </section>
         </div>
 
-        <footer>
-          <h2 id="contact">Contact</h2>
+        <footer className="pb-[70px] mb-[50px]">
+          <h2 id="contact" className="heading-with-icon">Contact</h2>
           <div className="text-center">
-            <div className="Contact-heading">You can drop me a line at</div>
-            <a className="Email Footer-link">
-              <strong>priyanshbalyan</strong> at <strong>gmail</strong> dot com
+            <div className="mb-[5px]">You can drop me a line at</div>
+            <a className="Email nav-link text-brand-navy inline-block my-[5px] mx-auto text-[30px] max-md:text-[18px] max-md:my-[10px] max-md:mb-[25px]" href="mailto:priyanshbalyan@gmail.com">
+               <span className="nav-link-span font-bold">priyanshbalyan</span> at <span className="nav-link-span font-bold">gmail</span> dot com
             </a>
-            <div className="Contact-heading">You can find me on</div>
-            <div className="Social">
-              <a className="Footer-link Social-link" href="https://www.linkedin.com/in/priyanshbalyan/">
-                <strong>linkedin</strong>.com/<strong>priyanshbalyan</strong>
+            <div className="mb-[5px]">You can find me on</div>
+            <div className="mt-[5px]">
+              <a className="nav-link text-brand-navy block leading-[2] max-md:text-[18px]" href="https://www.linkedin.com/in/priyanshbalyan/">
+                <span className="nav-link-span font-bold text-brand-pink pr-1">linkedin</span>.com/<span className="nav-link-span font-bold">priyanshbalyan</span>
               </a>
               <br />
-              <a className="Footer-link Social-link" href="http://github.com/priyanshbalyan">
-                <strong>github</strong>.com/<strong>priyanshbalyan</strong>
+              <a className="nav-link text-brand-navy block leading-[2] max-md:text-[18px]" href="http://github.com/priyanshbalyan">
+                <span className="nav-link-span font-bold text-brand-pink pr-1">github</span>.com/<span className="nav-link-span font-bold">priyanshbalyan</span>
               </a>
               <br />
-              <a className="Footer-link Social-link" href="http://codepen.io/priyanshbalyan">
-                <strong>codepen</strong>.io/<strong>priyanshbalyan</strong>
+              <a className="nav-link text-brand-navy block leading-[2] max-md:text-[18px]" href="http://codepen.io/priyanshbalyan">
+                <span className="nav-link-span font-bold text-brand-pink pr-1">codepen</span>.io/<span className="nav-link-span font-bold">priyanshbalyan</span>
               </a>
               <br />
               <a
-                className="Footer-link Social-link"
+                className="nav-link text-brand-navy block leading-[2] max-md:text-[18px]"
                 href="https://docs.google.com/document/d/1Aimw-h4wFM6_kSxg8RYiK8f76Qp4JmUf6zPI-J1wFOM/edit?usp=sharing"
               >
-                <strong>Resume</strong>
+                <span className="nav-link-span font-bold text-brand-pink">Resume</span>
               </a>
             </div>
           </div>
@@ -214,9 +241,10 @@ export default function App() {
           </div>
         </footer>
       </main>
-      <div className="Scene--bottom">
-        <canvas className="Scene-mountains Scene-mountains--bottom"></canvas>
+      <div className="relative w-full rotate-180 h-[150px] overflow-hidden pointer-events-none max-md:h-[100px]">
+        <canvas className="absolute bottom-0 left-0 w-full h-[300px] mb-[-150px] opacity-0 transition-opacity duration-100 max-md:h-[200px] max-md:mb-[-100px]"></canvas>
       </div>
+
     </div>
   );
 }
